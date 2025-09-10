@@ -1,12 +1,12 @@
 import {Application, Assets, Text} from "pixi.js";
 import {Level} from "./level.ts";
+import {getLevelAsset} from "./assets.ts";
 
 (async () => {
     const app = await appInit();
     await loadAssets();
 
-
-    const level1: Level = new Level("test_level_1");
+    const level1: Level = new Level(getLevelAsset(1).background.alias);
     level1.centerToParent(app.screen);
 
     app.stage.addChild(level1.view);
@@ -23,15 +23,13 @@ async function appInit(): Promise<Application> {
     const app = new Application();
     await app.init({background: "#2b3928", resizeTo: window});
     document.getElementById("pixi-container")!.appendChild(app.canvas);
-
-    await Assets.load({alias: "Ithaca", src: "assets/fonts/Ithaca.ttf"});
     return app;
 }
 
 async function loadAssets(): Promise<void> {
     await Assets.load([
         {alias: "Ithaca", src: "assets/fonts/Ithaca.ttf"},
-        {alias: "test_level_1", src: "assets/levels/test_level_1.png"},
+        getLevelAsset(1).background,
         {alias: "rosana", src: "assets/sprites/rosana/main.png"},
     ]);
 }
