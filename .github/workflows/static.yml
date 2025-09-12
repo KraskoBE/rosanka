@@ -39,7 +39,7 @@ jobs:
           cache: 'npm'
       - name: Install dependencies
         working-directory: ./web-gl
-        run: npm install --no-package-lock
+        run: npm install
       - name: Build
         working-directory: ./web-gl
         run: npm run build
