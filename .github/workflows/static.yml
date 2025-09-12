@@ -39,7 +39,7 @@ jobs:
           cache: 'npm'
       - name: Install dependencies
         working-directory: ./web-gl
-        run: npm login && npm ci
+        run: npm ci
       - name: Build
         working-directory: ./web-gl
         run: npm run build
