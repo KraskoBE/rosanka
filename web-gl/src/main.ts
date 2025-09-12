@@ -1,26 +1,26 @@
-import {Application, Assets, Text} from "pixi.js";
+import {Application, Assets, Container} from "pixi.js";
 import {Level} from "./level.ts";
-import {buildButton, getLevelAsset} from "./utils.ts";
+import {buildButton, getLevelAsset, WINDOW_HEIGHT, WINDOW_WIDTH} from "./utils.ts";
 
 (async () => {
     const app = await appInit();
     await loadAssets();
 
-    const level1: Level = new Level(1);
-    level1.centerToParent(app.screen);
+    const mainContainer: Container = new Container();
+    mainContainer.width = WINDOW_WIDTH;
+    mainContainer.height = WINDOW_HEIGHT;
 
-    app.stage.addChild(level1.view);
-
-    const text1 = new Text({text: `Rosanka's Adventure`, style: {fontFamily: "Ithaca", fontSize: 50}});
-    if (level1.view) {
-        text1.y = level1.view.y - text1.height;
-        text1.x = level1.view.x + level1.view.width / 2 - text1.width / 2;
+    if (window.innerWidth < WINDOW_WIDTH) {
+        mainContainer.scale.set(window.innerWidth / WINDOW_WIDTH);
     }
 
+    const level1: Level = new Level(1);
+    level1.view.x = 50;
+    level1.view.y = 50;
     const button = buildButton("Click me!", 30, 'white', "red", 'orange');
 
-    app.stage.addChild(button.view);
-    app.stage.addChild(text1);
+    mainContainer.addChild(level1.view, button.view);
+    app.stage.addChild(mainContainer);
 })();
 
 async function appInit(): Promise<Application> {

@@ -1,4 +1,4 @@
-import {Assets, Container, Point, Rectangle, Sprite, Ticker} from "pixi.js";
+import {Assets, Container, Point, Sprite, Ticker} from "pixi.js";
 import {Rosana} from "./rosana.ts";
 import {Controller} from "./controller.ts";
 import {Direction, getLevelAsset, LevelData} from "./utils.ts";
@@ -20,11 +20,6 @@ export class Level {
         this.view.addChild(Sprite.from(getLevelAsset(levelNumber).background.alias));
         this.data = Assets.get(getLevelAsset(levelNumber).data.alias);
         this.rosana = this.spawn();
-    }
-
-    public centerToParent(parent: Rectangle): void {
-        this.view.x = parent.width / 2 - this.view.width / 2;
-        this.view.y = parent.height / 2 - this.view.height / 2;
     }
 
     public spawn(): Rosana {

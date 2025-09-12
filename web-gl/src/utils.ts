@@ -47,3 +47,6 @@ export interface Coordinates {
 
 export type Direction = "up" | "down" | "left" | "right";
 export type FacingDirection = "left" | "right";
+
+export const WINDOW_WIDTH = 1400;
+export const WINDOW_HEIGHT = 1000;
