@@ -1,5 +1,5 @@
 import {Button} from "@pixi/ui";
-import {Container, FillInput, Graphics, Point, Text} from "pixi.js";
+import {Container, FillInput, Graphics, Point, Sprite, Text} from "pixi.js";
 
 export interface Asset {
     alias: string;
@@ -37,16 +37,37 @@ export function buildButton(text: string, fontSize: number, backgroundFill: Fill
 
 export interface LevelData {
     spawn: Point;
+    terrainData: TerrainEntityData[];
 }
-
-export interface Coordinates {
-    x: number;
-    y: number;
-}
-
 
 export type Direction = "up" | "down" | "left" | "right";
 export type FacingDirection = "left" | "right";
 
 export const WINDOW_WIDTH = 1400;
 export const WINDOW_HEIGHT = 1000;
+
+
+export interface TerrainEntityData {
+    sprite: string;
+    position: Point;
+    interactText: string;
+}
+
+export interface TerrainEntity {
+    sprite: Sprite;
+    position: Point;
+    interactText: string;
+}
+
+export function buildTerrainData(data: LevelData): TerrainEntity[] {
+    return data.terrainData.map((entityData) => {
+        const sprite = Sprite.from(entityData.sprite);
+        sprite.x = entityData.position.x * 32;
+        sprite.y = entityData.position.y * 32;
+        return {
+            sprite: sprite,
+            position: entityData.position,
+            interactText: entityData.interactText
+        }
+    })
+}

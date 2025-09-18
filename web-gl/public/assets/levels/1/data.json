@@ -2,5 +2,140 @@
   "spawn": {
     "x": 1,
     "y": 3
-  }
+  },
+  "terrainData": [
+    {
+      "sprite": "rock_1",
+      "position": {
+        "x": 5,
+        "y": 5
+      }
+    },
+    {
+      "sprite": "rock_2",
+      "position": {
+        "x": 7,
+        "y": 5
+      }
+    },
+    {
+      "sprite": "rock_1",
+      "position": {
+        "x": 10,
+        "y": 2
+      }
+    },
+    {
+      "sprite": "rock_1",
+      "position": {
+        "x": 15,
+        "y": 8
+      }
+    },
+    {
+      "sprite": "rock_2",
+      "position": {
+        "x": 20,
+        "y": 12
+      }
+    },
+    {
+      "sprite": "rock_2",
+      "position": {
+        "x": 25,
+        "y": 4
+      }
+    },
+    {
+      "sprite": "rock_1",
+      "position": {
+        "x": 30,
+        "y": 16
+      }
+    },
+    {
+      "sprite": "rock_2",
+      "position": {
+        "x": 35,
+        "y": 7
+      }
+    },
+    {
+      "sprite": "rock_1",
+      "position": {
+        "x": 38,
+        "y": 14
+      }
+    },
+    {
+      "sprite": "rock_1",
+      "position": {
+        "x": 12,
+        "y": 10
+      }
+    },
+    {
+      "sprite": "rock_1",
+      "position": {
+        "x": 18,
+        "y": 3
+      }
+    },
+    {
+      "sprite": "rock_1",
+      "position": {
+        "x": 22,
+        "y": 15
+      }
+    },
+    {
+      "sprite": "rock_1",
+      "position": {
+        "x": 28,
+        "y": 6
+      }
+    },
+    {
+      "sprite": "rock_1",
+      "position": {
+        "x": 33,
+        "y": 11
+      }
+    },
+    {
+      "sprite": "rock_1",
+      "position": {
+        "x": 3,
+        "y": 8
+      }
+    },
+    {
+      "sprite": "rock_1",
+      "position": {
+        "x": 14,
+        "y": 15
+      }
+    },
+    {
+      "sprite": "rock_1",
+      "position": {
+        "x": 27,
+        "y": 2
+      }
+    },
+    {
+      "sprite": "rock_2",
+      "position": {
+        "x": 8,
+        "y": 13
+      }
+    },
+    {
+      "sprite": "rock_2",
+      "position": {
+        "x": 19,
+        "y": 6
+      }
+    }
+  ]
 }

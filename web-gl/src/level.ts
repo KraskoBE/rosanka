@@ -1,7 +1,7 @@
 import {Assets, Container, Point, Sprite, Ticker} from "pixi.js";
 import {Rosana} from "./rosana.ts";
 import {Controller} from "./controller.ts";
-import {Direction, getLevelAsset, LevelData} from "./utils.ts";
+import {buildTerrainData, Direction, getLevelAsset, LevelData, TerrainEntity} from "./utils.ts";
 
 export class Level {
 
@@ -10,6 +10,7 @@ export class Level {
     private readonly gridHeight: number;
     private readonly gridSize: number;
     private readonly data: LevelData;
+    private readonly terrainData: TerrainEntity[] = [];
     private readonly rosana: Rosana;
 
     constructor(levelNumber: number, gridWidth: number = 40, gridHeight: number = 18, gridSize: number = 32) {
@@ -17,8 +18,10 @@ export class Level {
         this.gridWidth = gridWidth;
         this.gridHeight = gridHeight;
         this.gridSize = gridSize;
-        this.view.addChild(Sprite.from(getLevelAsset(levelNumber).background.alias));
         this.data = Assets.get(getLevelAsset(levelNumber).data.alias);
+        this.terrainData = buildTerrainData(this.data);
+
+        this.renderBackgroundAndTerrain(levelNumber);
         this.rosana = this.spawn();
     }
 
@@ -83,11 +86,23 @@ export class Level {
         if (this.isWall(targetLocation)) {
             return true;
         }
+
+        if(this.terrainData.some(entity => entity.position.x === targetLocation.x && entity.position.y === targetLocation.y)) {
+            return true;
+        }
         return false;
 
     }
 
     private isWall(targetLocation: Point) {
         return (targetLocation.x == 0 || targetLocation.y == 0 || targetLocation.x == this.gridWidth - 1 || targetLocation.y == this.gridHeight - 1);
+    }
+
+    private renderBackgroundAndTerrain(levelNumber: number) {
+        this.view.addChild(Sprite.from(getLevelAsset(levelNumber).background.alias));
+
+        for (const entity of this.terrainData) {
+            this.view.addChild(entity.sprite);
+        }
     }
 }

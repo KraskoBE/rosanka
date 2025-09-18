@@ -36,5 +36,7 @@ async function loadAssets(): Promise<void> {
         getLevelAsset(1).background,
         getLevelAsset(1).data,
         {alias: "rosana", src: "assets/sprites/rosana/main.png"},
+        {alias: "rock_1", src: "assets/sprites/terrain/rock_1.png"},
+        {alias: "rock_2", src: "assets/sprites/terrain/rock_2.png"},
     ]);
 }
