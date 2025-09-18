@@ -87,11 +87,7 @@ export class Level {
             return true;
         }
 
-        if(this.terrainData.some(entity => entity.position.x === targetLocation.x && entity.position.y === targetLocation.y)) {
-            return true;
-        }
-        return false;
-
+        return this.terrainData.some(entity => entity.position.x === targetLocation.x && entity.position.y === targetLocation.y);
     }
 
     private isWall(targetLocation: Point) {
