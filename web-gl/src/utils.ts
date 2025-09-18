@@ -88,10 +88,12 @@ function getDefaultTextTitle(sprite: string): string {
             return "Silver Ore";
         case "nitrile_node":
             return "Nitrile Ore";
+        default:
+            return "";
     }
 }
 
-function getDefaultTextThumbnail(sprite: string) {
+function getDefaultTextThumbnail(sprite: string): string {
 
     switch (sprite) {
         case "copper_node":
@@ -102,6 +104,8 @@ function getDefaultTextThumbnail(sprite: string) {
             return "silver_ore"
         case "nitrile_node":
             return "nitrile_ore"
+        default:
+            return "";
     }
 }
 
