@@ -14,7 +14,7 @@ const keyMap = {
 
 // Class for handling keyboard inputs.
 export class Controller {
-    private keys = {
+    public keys = {
         up: {pressed: false},
         left: {pressed: false},
         down: {pressed: false},

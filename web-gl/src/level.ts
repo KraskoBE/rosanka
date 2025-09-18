@@ -1,23 +1,21 @@
 import {Assets, Container, Point, Sprite, Ticker} from "pixi.js";
 import {Rosana} from "./rosana.ts";
 import {Controller} from "./controller.ts";
-import {buildTerrainData, Direction, getLevelAsset, LevelData, TerrainEntity} from "./utils.ts";
+import {buildDialog, buildTerrainData, Direction, getLevelAsset, LevelData, TerrainEntity} from "./utils.ts";
 
 export class Level {
 
     public readonly view: Container;
     private readonly gridWidth: number;
     private readonly gridHeight: number;
-    private readonly gridSize: number;
     private readonly data: LevelData;
     private readonly terrainData: TerrainEntity[] = [];
     private readonly rosana: Rosana;
 
-    constructor(levelNumber: number, gridWidth: number = 40, gridHeight: number = 18, gridSize: number = 32) {
+    constructor(levelNumber: number, gridWidth: number = 40, gridHeight: number = 18) {
         this.view = new Container();
         this.gridWidth = gridWidth;
         this.gridHeight = gridHeight;
-        this.gridSize = gridSize;
         this.data = Assets.get(getLevelAsset(levelNumber).data.alias);
         this.terrainData = buildTerrainData(this.data);
 
@@ -62,9 +60,20 @@ export class Level {
             }
             if (controller.keys.space.pressed) {
                 let facingEntity = this.getFacingEntity(rosana.getPosition(), rosana.getFacingDirection());
-                if(facingEntity){
+                if (facingEntity) {
+                    console.log(facingEntity);
                     this.view.removeChild(facingEntity.sprite);
-                    this.terrainData.splice(this.terrainData.indexOf(facingEntity),1);
+                    this.terrainData.splice(this.terrainData.indexOf(facingEntity), 1);
+
+                    let dialog = buildDialog(
+                        this.view.getSize(),
+                        facingEntity.interactTextTitle,
+                        facingEntity.interactTextContent,
+                        facingEntity.interactTextThumbnail);
+                    dialog.x = 0;
+                    dialog.y = 0;
+                    console.log(this.view.getSize())
+                    this.view.addChild(dialog);
                 }
             }
 

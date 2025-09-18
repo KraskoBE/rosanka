@@ -6,6 +6,16 @@
   "terrainData": [
     {
       "sprite": "rock_1",
+      "interactTextTitle": "Interact Title",
+      "interactTextContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, urna eu tincidunt consectetur, nisi nisl aliquam eros, a facilisis enim leo nec urna. Praesent euismod, justo at dictum cursus, enim erat cursus erat, nec dictum urna erat eu erat. Etiam euismod, urna eu tincidunt consectetur, nisi nisl aliquam eros, a facilisis enim leo nec urna. Suspendisse potenti. Mauris euismod, justo at dictum cursus, enim erat cursus erat, nec dictum urna erat eu erat.",
+      "interactTextThumbnail": "gold_ore",
+      "position": {
+        "x": 2,
+        "y": 3
+      }
+    },
+    {
+      "sprite": "rock_1",
       "position": {
         "x": 5,
         "y": 5

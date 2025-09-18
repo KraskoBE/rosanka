@@ -1,5 +1,5 @@
 import {Button} from "@pixi/ui";
-import {Container, FillInput, Graphics, Point, Sprite, Text} from "pixi.js";
+import {Color, Container, FillInput, Graphics, Point, Size, Sprite, Text} from "pixi.js";
 
 export interface Asset {
     alias: string;
@@ -50,13 +50,17 @@ export const WINDOW_HEIGHT = 1000;
 export interface TerrainEntityData {
     sprite: string;
     position: Point;
-    interactText: string;
+    interactTextTitle: string;
+    interactTextContent: string;
+    interactTextThumbnail?: string;
 }
 
 export interface TerrainEntity {
     sprite: Sprite;
     position: Point;
-    interactText: string;
+    interactTextTitle: string;
+    interactTextContent: string;
+    interactTextThumbnail?: string;
 }
 
 export function buildTerrainData(data: LevelData): TerrainEntity[] {
@@ -67,7 +71,80 @@ export function buildTerrainData(data: LevelData): TerrainEntity[] {
         return {
             sprite: sprite,
             position: entityData.position,
-            interactText: entityData.interactText
+            interactTextTitle: entityData.interactTextTitle ?? getDefaultTextTitle(entityData.sprite),
+            interactTextContent: entityData.interactTextContent,
+            interactTextThumbnail: entityData.interactTextThumbnail ?? getDefaultTextThumbnail(entityData.sprite)
         }
     })
+}
+
+function getDefaultTextTitle(sprite: string): string {
+    switch (sprite) {
+        case "copper_node":
+            return "Copper Ore";
+        case "gold_node":
+            return "Gold Ore";
+        case "silver_node":
+            return "Silver Ore";
+        case "nitrile_node":
+            return "Nitrile Ore";
+    }
+}
+
+function getDefaultTextThumbnail(sprite: string) {
+
+    switch (sprite) {
+        case "copper_node":
+            return "copper_ore"
+        case "gold_node":
+            return "gold_ore"
+        case "silver_node":
+            return "silver_ore"
+        case "nitrile_node":
+            return "nitrile_ore"
+    }
+}
+
+export function buildDialog(size: Size, title: string, content: string, thumbnail?: string): Container {
+    const dialogView: Container = new Container();
+    const dialogBg: Graphics = new Graphics();
+
+    dialogBg.clear()
+        .roundRect(20, 20, size.width - 40, size.height - 40, 10)
+        .fill(new Color("0xffffffb4"))
+
+    const titleText: Text = new Text({
+        x: 70,
+        y: 70,
+        text: title,
+        style: {
+            fontFamily: "Ithaca",
+            fontSize: 120,
+            fill: 'black'
+        }
+    });
+
+    const contentText: Text = new Text({
+        x: 70,
+        y: titleText.y + titleText.height + 40,
+        text: content,
+        style: {
+            fontFamily: "Ithaca",
+            fontSize: 45,
+            fill: 'black',
+            wordWrap: true,
+            wordWrapWidth: size.width - 140
+        }
+    });
+
+    dialogView.addChild(dialogBg, titleText, contentText);
+
+
+    if (thumbnail) {
+        const thumbnailSprite = Sprite.from(thumbnail);
+        thumbnailSprite.x = size.width - 200;
+        thumbnailSprite.y = 30;
+        dialogView.addChild(thumbnailSprite);
+    }
+    return dialogView;
 }
