@@ -36,21 +36,25 @@ export class Rosana {
             case "left":
                 this.sprite.x -= 32;
                 this.position.x--;
-                if (this.facingDirection === "right") {
-                    this.facingDirection = "left";
-                    this.sprite.scale.x *= -1;
-                }
+                this.switchFacingDirection("left");
                 break;
             case "right":
                 this.sprite.x += 32;
                 this.position.x++;
-                if (this.facingDirection === "left") {
-                    this.facingDirection = "right";
-                    this.sprite.scale.x *= -1;
-                }
+                this.switchFacingDirection("right");
                 break;
         }
         this.lastMovedTime = Date.now();
+    }
+
+    public switchFacingDirection(direction: Direction) {
+        if (direction === "up" || direction === "down") {
+            return;
+        }
+        if (direction !== this.facingDirection) {
+            this.facingDirection = direction;
+            this.sprite.scale.x *= -1;
+        }
     }
 
     public getPosition(): Point {
@@ -62,5 +66,9 @@ export class Rosana {
         this.position.y = y;
         this.sprite.x = x * 32;
         this.sprite.y = y * 32;
+    }
+
+    public getFacingDirection(): FacingDirection {
+        return this.facingDirection;
     }
 }

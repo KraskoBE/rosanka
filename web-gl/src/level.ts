@@ -60,6 +60,14 @@ export class Level {
                 }
                 rosana.move("left");
             }
+            if (controller.keys.space.pressed) {
+                let facingEntity = this.getFacingEntity(rosana.getPosition(), rosana.getFacingDirection());
+                if(facingEntity){
+                    this.view.removeChild(facingEntity.sprite);
+                    this.terrainData.splice(this.terrainData.indexOf(facingEntity),1);
+                }
+            }
+
         });
         ticker.start();
 
@@ -67,6 +75,8 @@ export class Level {
     }
 
     public checkCollision(direction: Direction): boolean {
+        this.rosana.switchFacingDirection(direction);
+
         let targetLocation: Point = this.rosana.getPosition();
         switch (direction) {
             case "up":
@@ -100,5 +110,21 @@ export class Level {
         for (const entity of this.terrainData) {
             this.view.addChild(entity.sprite);
         }
+    }
+
+    private getFacingEntity(position: Point, facingDirection: Direction): TerrainEntity | undefined {
+        if (facingDirection === "up" || facingDirection === "down") {
+            return undefined;
+        }
+
+        let facingPosition: Point = position;
+
+        if (facingDirection === "left") {
+            facingPosition.x--;
+        }
+        if (facingDirection === "right") {
+            facingPosition.x++;
+        }
+        return this.terrainData.find(entity => entity.position.x === facingPosition.x && entity.position.y === facingPosition.y);
     }
 }
